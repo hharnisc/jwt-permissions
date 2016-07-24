@@ -1,1 +1,1 @@
-export const verifyPermission = () => {};
+export const verifyPermission = () => new Promise((resolve) => resolve());

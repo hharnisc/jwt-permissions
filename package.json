@@ -7,7 +7,9 @@
     "lib/",
     "src/"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "jsonwebtoken": "^7.1.6"
+  },
   "devDependencies": {
     "babel-cli": "^6.7.5",
     "babel-eslint": "^6.0.2",
