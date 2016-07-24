@@ -16,5 +16,12 @@ describe('jwt-permissions tests', () => {
       const accessToken = jsonwebtoken.sign({ roles: ['write'] }, secret);
       return verifyPermission({ requiredRoles, accessToken, secret });
     });
+
+    pit('does validate a token that has more complicated permission', () => {
+      const secret = 'the secret';
+      const requiredRoles = [/^write.*$/];
+      const accessToken = jsonwebtoken.sign({ roles: ['write-1234'] }, secret);
+      return verifyPermission({ requiredRoles, accessToken, secret });
+    });
   });
 });
