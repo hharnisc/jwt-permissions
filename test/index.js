@@ -23,5 +23,20 @@ describe('jwt-permissions tests', () => {
       const accessToken = jsonwebtoken.sign({ roles: ['write-1234'] }, secret);
       return verifyPermission({ requiredRoles, accessToken, secret });
     });
+
+    pit('does not validate a token that is missing a permission', () => {
+      const error = 'Invalid Token';
+      const secret = 'the secret';
+      const requiredRoles = [/^write$/];
+      const accessToken = jsonwebtoken.sign({ roles: ['read'] }, secret);
+      return verifyPermission({ requiredRoles, accessToken, secret })
+        .then(() => {
+          throw new Error('this should have broken');
+        })
+        .catch((actualError) => {
+          expect(actualError.message)
+            .toEqual(error);
+        });
+    });
   });
 });
