@@ -38,5 +38,13 @@ describe('jwt-permissions tests', () => {
             .toEqual(error);
         });
     });
+
+    it('does allow the roles key to be configured', () => {
+      const secret = 'the secret';
+      const rolesKey = 'rolesKey';
+      const requiredRoles = [/^write.*$/];
+      const accessToken = jsonwebtoken.sign({ rolesKey: ['write-1234'] }, secret);
+      return verifyPermission({ requiredRoles, accessToken, secret, rolesKey });
+    });
   });
 });
